@@ -253,7 +253,7 @@ export function fetchSignInMethodsForEmail(auth: Auth, email: string): Promise<s
 export function getAdditionalUserInfo(userCredential: UserCredential): AdditionalUserInfo | null;
 
 // @public
-export function getAuth(app: FirebaseApp): Auth;
+export function getAuth(app?: FirebaseApp): Auth;
 
 // @public
 export function getIdToken(user: User, forceRefresh?: boolean): Promise<string>;
@@ -463,6 +463,7 @@ export class PhoneAuthCredential extends AuthCredential {
 export class PhoneAuthProvider {
     constructor(auth: Auth);
     static credential(verificationId: string, verificationCode: string): PhoneAuthCredential;
+    static credentialFromError(error: FirebaseError): AuthCredential | null;
     // (undocumented)
     static credentialFromResult(userCredential: UserCredential): AuthCredential | null;
     static readonly PHONE_SIGN_IN_METHOD = SignInMethod.PHONE;
@@ -590,7 +591,7 @@ export function sendEmailVerification(user: User, actionCodeSettings?: ActionCod
 export function sendPasswordResetEmail(auth: Auth, email: string, actionCodeSettings?: ActionCodeSettings): Promise<void>;
 
 // @public
-export function sendSignInLinkToEmail(auth: Auth, email: string, actionCodeSettings?: ActionCodeSettings): Promise<void>;
+export function sendSignInLinkToEmail(auth: Auth, email: string, actionCodeSettings: ActionCodeSettings): Promise<void>;
 
 // @public
 export function setPersistence(auth: Auth, persistence: Persistence): Promise<void>;
