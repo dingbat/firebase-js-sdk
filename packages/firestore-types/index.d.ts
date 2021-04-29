@@ -16,10 +16,10 @@
  */
 
 import { FirebaseApp, FirebaseNamespace } from '@firebase/app-types';
+import UpdateData from './UpdateData';
 
+export { default as UpdateData } from './UpdateData';
 export type DocumentData = { [field: string]: any };
-
-export type UpdateData = { [fieldPath: string]: any };
 
 export const CACHE_SIZE_UNLIMITED: number;
 
@@ -188,7 +188,10 @@ export class Transaction {
   ): Transaction;
   set<T>(documentRef: DocumentReference<T>, data: T): Transaction;
 
-  update(documentRef: DocumentReference<any>, data: UpdateData): Transaction;
+  update<T>(
+    documentRef: DocumentReference<T>,
+    data: UpdateData<T>
+  ): Transaction;
   update(
     documentRef: DocumentReference<any>,
     field: string | FieldPath,
@@ -209,7 +212,7 @@ export class WriteBatch {
   ): WriteBatch;
   set<T>(documentRef: DocumentReference<T>, data: T): WriteBatch;
 
-  update(documentRef: DocumentReference<any>, data: UpdateData): WriteBatch;
+  update<T>(documentRef: DocumentReference<T>, data: UpdateData<T>): WriteBatch;
   update(
     documentRef: DocumentReference<any>,
     field: string | FieldPath,
@@ -250,7 +253,7 @@ export class DocumentReference<T = DocumentData> {
   set(data: Partial<T>, options: SetOptions): Promise<void>;
   set(data: T): Promise<void>;
 
-  update(data: UpdateData): Promise<void>;
+  update(data: UpdateData<T>): Promise<void>;
   update(
     field: string | FieldPath,
     value: any,

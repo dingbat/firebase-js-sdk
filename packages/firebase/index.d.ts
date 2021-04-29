@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+import type { UpdateData } from '../firestore-types';
+
 /**
  * <code>firebase</code> is a global namespace from which all Firebase
  * services are accessed.
@@ -7968,7 +7970,7 @@ declare namespace firebase.firestore {
    * paths (e.g. 'foo' or 'foo.baz') mapped to values. Fields that contain dots
    * reference nested fields within the document.
    */
-  export type UpdateData = { [fieldPath: string]: any };
+  export { UpdateData };
 
   /**
    * Constant used to indicate the LRU garbage collection should be disabled.
@@ -8726,7 +8728,10 @@ declare namespace firebase.firestore {
      * within the document.
      * @return This `Transaction` instance. Used for chaining method calls.
      */
-    update(documentRef: DocumentReference<any>, data: UpdateData): Transaction;
+    update<T>(
+      documentRef: DocumentReference<T>,
+      data: UpdateData<T>
+    ): Transaction;
 
     /**
      * Updates fields in the document referred to by the provided
@@ -8811,7 +8816,10 @@ declare namespace firebase.firestore {
      * within the document.
      * @return This `WriteBatch` instance. Used for chaining method calls.
      */
-    update(documentRef: DocumentReference<any>, data: UpdateData): WriteBatch;
+    update<T>(
+      documentRef: DocumentReference<T>,
+      data: UpdateData<T>
+    ): WriteBatch;
 
     /**
      * Updates fields in the document referred to by this `DocumentReference`.
@@ -9001,7 +9009,7 @@ declare namespace firebase.firestore {
      * @return A Promise resolved once the data has been successfully written
      * to the backend (Note that it won't resolve while you're offline).
      */
-    update(data: UpdateData): Promise<void>;
+    update<T>(data: UpdateData<T>): Promise<void>;
 
     /**
      * Updates fields in the document referred to by this `DocumentReference`.

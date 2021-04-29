@@ -120,7 +120,7 @@ export class WriteBatch {
    * within the document.
    * @returns This `WriteBatch` instance. Used for chaining method calls.
    */
-  update(documentRef: DocumentReference<unknown>, data: UpdateData): WriteBatch;
+  update<T>(documentRef: DocumentReference<T>, data: UpdateData<T>): WriteBatch;
   /**
    * Updates fields in the document referred to by this {@link
    * DocumentReference}. The update will fail if applied to a document that does
@@ -136,14 +136,14 @@ export class WriteBatch {
    * @returns This `WriteBatch` instance. Used for chaining method calls.
    */
   update(
-    documentRef: DocumentReference<unknown>,
+    documentRef: DocumentReference,
     field: string | FieldPath,
     value: unknown,
     ...moreFieldsAndValues: unknown[]
   ): WriteBatch;
-  update(
-    documentRef: DocumentReference<unknown>,
-    fieldOrUpdateData: string | FieldPath | UpdateData,
+  update<T>(
+    documentRef: DocumentReference<T>,
+    fieldOrUpdateData: string | FieldPath | UpdateData<T>,
     value?: unknown,
     ...moreFieldsAndValues: unknown[]
   ): WriteBatch {

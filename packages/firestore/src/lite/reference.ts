@@ -38,6 +38,8 @@ import { FirebaseFirestore } from './database';
 import { FieldPath } from './field_path';
 import { FirestoreDataConverter } from './snapshot';
 
+export type { UpdateData } from '../../../firestore-types';
+
 /**
  * Document data (for use with {@link @firebase/firestore/lite#(setDoc:1)}) consists of fields mapped to
  * values.
@@ -46,17 +48,6 @@ export interface DocumentData {
   /** A mapping between a field and its value. */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [field: string]: any;
-}
-
-/**
- * Update data (for use with {@link @firebase/firestore/lite#(updateDoc:1)}) consists of field paths (e.g.
- * 'foo' or 'foo.baz') mapped to values. Fields that contain dots reference
- * nested fields within the document.
- */
-export interface UpdateData {
-  /** A mapping between a dot-separated field path and its value. */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [fieldPath: string]: any;
 }
 
 /**
